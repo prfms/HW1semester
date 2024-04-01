@@ -8,5 +8,6 @@ add_executable(HW6
         mergeList.c
         mergeList.h
         mergeListTest.c
+        mergeListTest.h
         input.txt
 )

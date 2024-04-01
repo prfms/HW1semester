@@ -3,18 +3,25 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef struct List
+{
+    char *name;
+    char *phone;
+    struct List *next;
+} List;
+
 Error addRecord(List **head, char *name, char *phone)
 {
     List *record = calloc(1, sizeof(List));
     if (record == NULL)
     {
-        return -1;
+        return MemoryAllocationError;
     }
-    strcpy(record->name, name);
-    strcpy(record->phone, phone);
+    record->name = strdup(name);
+    record->phone = strdup(phone);
     record->next = *head;
     *head = record;
-    return 0;
+    return OK;
 }
 
 void freeList(List **head)
@@ -28,6 +35,8 @@ void freeList(List **head)
     {
         tmp = *head;
         *head = (*head)->next;
+        free(tmp->name);
+        free(tmp->phone);
         free(tmp);
     }
 }
@@ -41,13 +50,9 @@ void printList(List *head)
     }
 }
 
-int compare(List *left, List *right, int typeOfCompare)
+int compare(List *left, List *right, int TypeOfCompare)
 {
-    if (typeOfCompare == 0)
-    {
-        return strcmp(left->name, right->name);
-    }
-    return strcmp(left->phone, right->phone);
+    TypeOfCompare == CompareByName ? strcmp(left->name, right->name) : strcmp(left->phone, right->phone);
 }
 
 void split(List *sourceList, List **leftList, List **rightList)

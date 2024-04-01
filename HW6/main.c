@@ -1,23 +1,39 @@
 #include <stdio.h>
-#include "mergeList.h"
+#include "mergeList.c"
+#include "mergeListTest.c"
+
+// функция для вывода ошибок
+void printErrors(Error errorCode)
+{
+    switch (errorCode)
+    {
+        case OK:
+            break;
+        case MemoryAllocationError:
+            printf("Memory allocation error!\n");
+            break;
+        case FileNotFound:
+            printf("Input file is not found!\n");
+            break;
+        case TestsFailed:
+            printf("Tests have failed!\n");
+            break;
+    }
+}
 
 int main()
 {
     if (!tests())
     {
-        printf("TESTS FAILED!\n");
-        return -100;
+        printErrors(TestsFailed);
+        return TestsFailed;
     }
     List *head = NULL;
     int errorCode = fillList(&head, "HW6/input.txt");
-    if (errorCode == -1)
+    if (errorCode != OK)
     {
-        printf("Memory error!\n");
-    }
-    if (errorCode == -2)
-    {
-        printf("There is no file!\n");
-        return -2;
+        printErrors(errorCode);
+        return errorCode;
     }
     int typeOfCompare = 0; // 0 - name, 1 - phone
     int scanResult = 0;
