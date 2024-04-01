@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "mergeList.c"
-#include "mergeListTest.c"
+#include "mergeList.h"
+#include "mergeListTest.h"
 
 // функция для вывода ошибок
 void printErrors(Error errorCode)
