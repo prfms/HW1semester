@@ -1,18 +1,18 @@
 #include <stdbool.h>
 #include <stdio.h>
-#include "BinaryNumber.h"
+#include "BinaryNumberTest.h"
 
 bool testBinaryRepresentation()
 {
     int number = 12;
-    unsigned char binaryNumber[lengthBinaryNumber] = {0};
-    unsigned char correctBinaryNumber[lengthBinaryNumber] = {0};
-    correctBinaryNumber[lengthBinaryNumber - 3] = 1;
-    correctBinaryNumber[lengthBinaryNumber - 4] = 1;
+    unsigned char binaryNumber[LENGTH_BINARY_NUMBER] = {0};
+    unsigned char correctBinaryNumber[LENGTH_BINARY_NUMBER] = {0};
+    correctBinaryNumber[LENGTH_BINARY_NUMBER - 3] = 1; // 000100 = 4
+    correctBinaryNumber[LENGTH_BINARY_NUMBER - 4] = 1; // 001000 = 8
 
     binaryRepresentation(binaryNumber, number);
 
-    for (int i = 0; i < lengthBinaryNumber; ++i)
+    for (int i = 0; i < LENGTH_BINARY_NUMBER; ++i)
     {
         if (binaryNumber[i] != correctBinaryNumber[i])
         {
@@ -24,19 +24,19 @@ bool testBinaryRepresentation()
 
 bool testAddBinaryNumbers()
 {
-    unsigned char binaryNumber1[lengthBinaryNumber] = {0};
-    unsigned char binaryNumber2[lengthBinaryNumber] = {0};
+    unsigned char binaryNumber1[LENGTH_BINARY_NUMBER] = {0};
+    unsigned char binaryNumber2[LENGTH_BINARY_NUMBER] = {0};
 
-    binaryNumber1[lengthBinaryNumber - 3] = 1;
-    binaryNumber2[lengthBinaryNumber - 3] = 1;
+    binaryNumber1[LENGTH_BINARY_NUMBER - 3] = 1; // 000100 = 4
+    binaryNumber2[LENGTH_BINARY_NUMBER - 3] = 1; // 000100 = 4
 
-    unsigned char result[lengthBinaryNumber] = {0};
-    unsigned char correctResult[lengthBinaryNumber] = {0};
-    correctResult[lengthBinaryNumber - 4] = 1;
+    unsigned char result[LENGTH_BINARY_NUMBER] = {0};
+    unsigned char correctResult[LENGTH_BINARY_NUMBER] = {0};
+    correctResult[LENGTH_BINARY_NUMBER - 4] = 1; // 001000 = 8
 
     addBinaryNumbers(binaryNumber1, binaryNumber2, result);
 
-    for (int i = 0; i < lengthBinaryNumber; ++i)
+    for (int i = 0; i < LENGTH_BINARY_NUMBER; ++i)
     {
         if (result[i] != correctResult[i])
         {
@@ -48,25 +48,26 @@ bool testAddBinaryNumbers()
 
 bool testConversionFromBinaryToDecimal()
 {
-    unsigned char binaryNumber[lengthBinaryNumber] = {0};
-    binaryNumber[lengthBinaryNumber - 3] = 1;
-    binaryNumber[lengthBinaryNumber - 4] = 1;
-    return conversionFromBinaryToDecimal(binaryNumber, lengthBinaryNumber) == 12;
+    unsigned char binaryNumber[LENGTH_BINARY_NUMBER] = {0};
+    binaryNumber[LENGTH_BINARY_NUMBER - 3] = 1; // 000100 = 4
+    binaryNumber[LENGTH_BINARY_NUMBER - 4] = 1; // 001000 = 8
+    return conversionFromBinaryToDecimal(binaryNumber, LENGTH_BINARY_NUMBER) == 12;
 }
 
 int testBinaryNumber() {
     if (!testBinaryRepresentation()) {
         printf("Ошибка работы функции BinaryRepresentation.\n");
-        return -1;
+        return IncorrectBinaryForm;
     }
 
     if (!testAddBinaryNumbers()) {
         printf("Ошибка работы функции AddBinaryNumbers.\n");
-        return -2;
+        return IncorrectSumOfBinary;
     }
 
     if (!testConversionFromBinaryToDecimal()) {
         printf("Ошибка работы функции ConversionFromBinaryToDecimal.\n");
-        return -3;
+        return IncorrectDecimalForm;
     }
+    return OK;
 }

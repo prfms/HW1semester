@@ -8,4 +8,5 @@ add_executable(HW4
         BinaryNumber.c
         BinaryNumber.h
         BinaryNumberTest.c
+        BinaryNumberTest.h
 )

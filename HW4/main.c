@@ -1,16 +1,22 @@
 #include <stdio.h>
 #include <locale.h>
 #include "BinaryNumber.h"
+#include "BinaryNumberTest.h"
 
 int main(){
     setlocale(LC_ALL, "");
 
+    if (testBinaryNumber())
+    {
+        printf("Тесты не прошли!\n");
+        return TestsFailed;
+    }
     int firstNumber = 0;
     int secondNumber = 0;
     int scanResFirstNumber = 0;
     int scanResSecondNumber = 0;
 
-    printf("??????? ??? ?????:\n");
+    printf("Введите два числа:\n");
     do
     {
         scanResFirstNumber = scanf("%d", &firstNumber);
@@ -18,31 +24,31 @@ int main(){
 
         if (!scanResFirstNumber || !scanResSecondNumber)
         {
-            printf("?????? ?????. ?????????? ??? ???.\n");
+            printf("Ошибка ввода. Вводить можно только целые числа. Попробуйте еще раз!\n");
             scanf("%*[^\n]");
         }
 
     } while (!scanResFirstNumber || !scanResSecondNumber);
 
-    unsigned char binaryFirstNumber[lengthBinaryNumber] = {0};
-    unsigned char binarySecondNumber[lengthBinaryNumber] = {0};
+    unsigned char binaryFirstNumber[LENGTH_BINARY_NUMBER] = {0};
+    unsigned char binarySecondNumber[LENGTH_BINARY_NUMBER] = {0};
     binaryRepresentation(binaryFirstNumber, firstNumber);
     binaryRepresentation(binarySecondNumber, secondNumber);
 
     printf("\n ");
-    printArray(binaryFirstNumber, lengthBinaryNumber);
+    printArray(binaryFirstNumber, LENGTH_BINARY_NUMBER);
     printf(" (%d)\n+\n ", firstNumber);
-    printArray(binarySecondNumber, lengthBinaryNumber);
+    printArray(binarySecondNumber, LENGTH_BINARY_NUMBER);
     printf(" (%d) \n --------------------------------\n ", secondNumber);
 
-    unsigned char binarySum[lengthBinaryNumber] = {0};
+    unsigned char binarySum[LENGTH_BINARY_NUMBER] = {0};
     addBinaryNumbers(binaryFirstNumber, binarySecondNumber, binarySum);
 
-    int decimalSum = conversionFromBinaryToDecimal(binarySum, lengthBinaryNumber);
+    int decimalSum = conversionFromBinaryToDecimal(binarySum, LENGTH_BINARY_NUMBER);
 
-    printArray(binarySum, lengthBinaryNumber);
+    printArray(binarySum, LENGTH_BINARY_NUMBER);
     printf(" (%d)", decimalSum);
-    printf("\n\n????? %d ? %d ????? %d.\n", firstNumber, secondNumber, decimalSum);
+    printf("\n\n Сумма %d и %d равна %d.\n", firstNumber, secondNumber, decimalSum);
 
     return 0;
 }

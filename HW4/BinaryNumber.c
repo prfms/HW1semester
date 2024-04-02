@@ -12,7 +12,7 @@ void printArray(unsigned char array[], char length)
 void binaryRepresentation(unsigned char array[], int number)
 {
     int bit = 1;
-    for (int i = lengthBinaryNumber - 1; i >= 0; --i)
+    for (int i = LENGTH_BINARY_NUMBER - 1; i >= 0; --i)
     {
         array[i] = (number & bit) ? 1 : 0;
         bit = bit << 1;
@@ -23,7 +23,7 @@ void addBinaryNumbers(unsigned char firstNumber[], unsigned char secondNumber[],
 {
     int temp = 0;
     int remainder = 0;
-    for (int i = lengthBinaryNumber - 1; i >= 0; --i)
+    for (int i = LENGTH_BINARY_NUMBER - 1; i >= 0; --i)
     {
         temp = firstNumber[i] + secondNumber[i] + remainder;
         answer[i] = temp & 1;
