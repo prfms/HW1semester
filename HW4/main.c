@@ -3,7 +3,8 @@
 #include "BinaryNumber.h"
 #include "BinaryNumberTest.h"
 
-int main(){
+int main()
+{
     setlocale(LC_ALL, "");
 
     if (testBinaryNumber())
@@ -30,10 +31,10 @@ int main(){
 
     } while (!scanResFirstNumber || !scanResSecondNumber);
 
-    unsigned char binaryFirstNumber[LENGTH_BINARY_NUMBER] = {0};
-    unsigned char binarySecondNumber[LENGTH_BINARY_NUMBER] = {0};
-    binaryRepresentation(binaryFirstNumber, firstNumber);
-    binaryRepresentation(binarySecondNumber, secondNumber);
+    bool binaryFirstNumber[LENGTH_BINARY_NUMBER] = {0};
+    bool binarySecondNumber[LENGTH_BINARY_NUMBER] = {0};
+    binaryRepresent(binaryFirstNumber, firstNumber);
+    binaryRepresent(binarySecondNumber, secondNumber);
 
     printf("\n ");
     printArray(binaryFirstNumber, LENGTH_BINARY_NUMBER);
@@ -41,10 +42,10 @@ int main(){
     printArray(binarySecondNumber, LENGTH_BINARY_NUMBER);
     printf(" (%d) \n --------------------------------\n ", secondNumber);
 
-    unsigned char binarySum[LENGTH_BINARY_NUMBER] = {0};
+    bool binarySum[LENGTH_BINARY_NUMBER] = {0};
     addBinaryNumbers(binaryFirstNumber, binarySecondNumber, binarySum);
 
-    int decimalSum = conversionFromBinaryToDecimal(binarySum, LENGTH_BINARY_NUMBER);
+    int decimalSum = convertFromBinaryToDecimal(binarySum, LENGTH_BINARY_NUMBER);
 
     printArray(binarySum, LENGTH_BINARY_NUMBER);
     printf(" (%d)", decimalSum);

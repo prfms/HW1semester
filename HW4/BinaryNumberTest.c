@@ -2,70 +2,70 @@
 #include <stdio.h>
 #include "BinaryNumberTest.h"
 
-bool testBinaryRepresentation()
+bool isEqualBinNum(bool correctBinNum[LENGTH_BINARY_NUMBER], bool testBinNum[LENGTH_BINARY_NUMBER])
 {
-    int number = 12;
-    unsigned char binaryNumber[LENGTH_BINARY_NUMBER] = {0};
-    unsigned char correctBinaryNumber[LENGTH_BINARY_NUMBER] = {0};
-    correctBinaryNumber[LENGTH_BINARY_NUMBER - 3] = 1; // 000100 = 4
-    correctBinaryNumber[LENGTH_BINARY_NUMBER - 4] = 1; // 001000 = 8
-
-    binaryRepresentation(binaryNumber, number);
-
     for (int i = 0; i < LENGTH_BINARY_NUMBER; ++i)
     {
-        if (binaryNumber[i] != correctBinaryNumber[i])
+        if (testBinNum[i] != correctBinNum[i])
         {
             return false;
         }
     }
     return true;
+}
+
+bool testBinaryRepresent()
+{
+    int number = 12;
+    bool binaryNumber[LENGTH_BINARY_NUMBER] = {0};
+    bool correctBinaryNumber[LENGTH_BINARY_NUMBER] = {0};
+    correctBinaryNumber[LENGTH_BINARY_NUMBER - 3] = 1; // 000100 = 4
+    correctBinaryNumber[LENGTH_BINARY_NUMBER - 4] = 1; // 001000 = 8
+
+    binaryRepresent(binaryNumber, number);
+    return isEqualBinNum(correctBinaryNumber, binaryNumber);
 }
 
 bool testAddBinaryNumbers()
 {
-    unsigned char binaryNumber1[LENGTH_BINARY_NUMBER] = {0};
-    unsigned char binaryNumber2[LENGTH_BINARY_NUMBER] = {0};
+    bool binaryNumber1[LENGTH_BINARY_NUMBER] = {0};
+    bool binaryNumber2[LENGTH_BINARY_NUMBER] = {0};
 
     binaryNumber1[LENGTH_BINARY_NUMBER - 3] = 1; // 000100 = 4
     binaryNumber2[LENGTH_BINARY_NUMBER - 3] = 1; // 000100 = 4
 
-    unsigned char result[LENGTH_BINARY_NUMBER] = {0};
-    unsigned char correctResult[LENGTH_BINARY_NUMBER] = {0};
+    bool result[LENGTH_BINARY_NUMBER] = {0};
+    bool correctResult[LENGTH_BINARY_NUMBER] = {0};
     correctResult[LENGTH_BINARY_NUMBER - 4] = 1; // 001000 = 8
 
     addBinaryNumbers(binaryNumber1, binaryNumber2, result);
-
-    for (int i = 0; i < LENGTH_BINARY_NUMBER; ++i)
-    {
-        if (result[i] != correctResult[i])
-        {
-            return false;
-        }
-    }
-    return true;
+    return isEqualBinNum(correctResult, result);
 }
 
-bool testConversionFromBinaryToDecimal()
+bool testConvertFromBinaryToDecimal()
 {
-    unsigned char binaryNumber[LENGTH_BINARY_NUMBER] = {0};
+    bool binaryNumber[LENGTH_BINARY_NUMBER] = {0};
     binaryNumber[LENGTH_BINARY_NUMBER - 3] = 1; // 000100 = 4
     binaryNumber[LENGTH_BINARY_NUMBER - 4] = 1; // 001000 = 8
-    return conversionFromBinaryToDecimal(binaryNumber, LENGTH_BINARY_NUMBER) == 12;
+    return convertFromBinaryToDecimal(binaryNumber, LENGTH_BINARY_NUMBER) == 12;
 }
 
-int testBinaryNumber() {
-    if (!testBinaryRepresentation()) {
+Error testBinaryNumber()
+{
+    if (!testBinaryRepresent())
+    {
         printf("Ошибка работы функции BinaryRepresentation.\n");
         return IncorrectBinaryForm;
     }
 
-    if (!testAddBinaryNumbers()) {
+    if (!testAddBinaryNumbers())
+    {
         printf("Ошибка работы функции AddBinaryNumbers.\n");
         return IncorrectSumOfBinary;
     }
 
-    if (!testConversionFromBinaryToDecimal()) {
+    if (!testConvertFromBinaryToDecimal())
+    {
         printf("Ошибка работы функции ConversionFromBinaryToDecimal.\n");
         return IncorrectDecimalForm;
     }

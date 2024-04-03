@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "BinaryNumber.h"
 
-void printArray(unsigned char array[], char length)
+void printArray(bool array[], char length)
 {
     for (int i = 0; i < length; ++i)
     {
@@ -9,7 +9,7 @@ void printArray(unsigned char array[], char length)
     }
 }
 
-void binaryRepresentation(unsigned char array[], int number)
+void binaryRepresent(bool array[], int number)
 {
     int bit = 1;
     for (int i = LENGTH_BINARY_NUMBER - 1; i >= 0; --i)
@@ -19,19 +19,18 @@ void binaryRepresentation(unsigned char array[], int number)
     }
 }
 
-void addBinaryNumbers(unsigned char firstNumber[], unsigned char secondNumber[], unsigned char answer[])
+void addBinaryNumbers(bool firstNumber[], bool secondNumber[], bool answer[])
 {
-    int temp = 0;
     int remainder = 0;
     for (int i = LENGTH_BINARY_NUMBER - 1; i >= 0; --i)
     {
-        temp = firstNumber[i] + secondNumber[i] + remainder;
+        int temp = firstNumber[i] + secondNumber[i] + remainder;
         answer[i] = temp & 1;
         remainder = temp >> 1;
     }
 }
 
-int conversionFromBinaryToDecimal(unsigned char array[], char length)
+int convertFromBinaryToDecimal(bool array[], char length)
 {
     int decimalResult = 0;
     int power = 1;
