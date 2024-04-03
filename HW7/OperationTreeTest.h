@@ -1,0 +1,8 @@
+#ifndef HOMEWORKS1SEMESTER_OPERATIONTREETEST_H
+#define HOMEWORKS1SEMESTER_OPERATIONTREETEST_H
+#include "OperationTree.h"
+#include <stdbool.h>
+
+bool tests();
+
+#endif //HOMEWORKS1SEMESTER_OPERATIONTREETEST_H
