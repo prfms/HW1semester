@@ -1,14 +1,17 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <locale.h>
-#include "QuickSort.h"
-#define arraySizeBound 1000
+#include "QuickSort.c"
+#include "QuickSortTest.c"
+#define ARRAY_SIZE_BOUND 1000
 
 int main()
 {
     setlocale(LC_ALL, "");
-
-    int array[arraySizeBound] = {0};
+    if (!testQuickSort()){
+        return -1;
+    }
+    int array[ARRAY_SIZE_BOUND] = {0};
     int arraySize = 0;
     int scanResult = 0;
     bool isCorrectInput = true;
@@ -20,9 +23,9 @@ int main()
 
         isCorrectInput = true;
 
-        if (!scanResult || arraySize < 1 || arraySize > arraySizeBound)
+        if (!scanResult || arraySize < 1 || arraySize > ARRAY_SIZE_BOUND)
         {
-            printf("Некорректный ввод (Размер положительный и не больше чем %d). Попробуйте снова.\n", arraySizeBound);
+            printf("Некорректный ввод (Размер положительный и не больше чем %d). Попробуйте снова.\n", ARRAY_SIZE_BOUND);
             scanf_s("%*[^\n]");
 
             isCorrectInput = false;

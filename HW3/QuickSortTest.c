@@ -1,7 +1,7 @@
 #include <stdbool.h>
-#include "QuickSort.h"
+#include "QuickSortTest.h"
 
-bool testQuickSort1()
+bool testReversedArray()
 {
     int array[5] = {5, 4, 3, 2, 1};
     quickSort(array, 0, 4);
@@ -12,7 +12,7 @@ bool testQuickSort1()
     return true;
 }
 
-bool testQuickSort2()
+bool testNegativeValueArray()
 {
     int array[4] = {-3, 0, -1, -2};
     int correctArray[4] = {-3, -2, -1, 0};
@@ -29,7 +29,7 @@ bool testQuickSort2()
     return true;
 }
 
-bool testQuickSort3()
+bool testConstantArray()
 {
     int array[6] = {1, 1, 1, 1, 1, 1};
 
@@ -45,10 +45,7 @@ bool testQuickSort3()
     return true;
 }
 
-int testQuickSort()
+bool testQuickSort()
 {
-    if (!testQuickSort1()) return -1;
-    if (!testQuickSort2()) return -2;
-    if (!testQuickSort3()) return -3;
-    return 0;
+    return testReversedArray() && testNegativeValueArray() && testConstantArray();
 }

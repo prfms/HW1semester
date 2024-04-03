@@ -1,6 +1,6 @@
-#define sizeInsertionSort 10
 #include <stdio.h>
 #include "QuickSort.h"
+#define SIZE_INSERTION_SORT 10
 
 void printArray(int array[], int lengthArray)
 {
@@ -51,7 +51,7 @@ void insertsSort(int array[], int leftIndex, int rightIndex)
 
 void quickSort(int array[], int leftIndex, int rightIndex)
 {
-    if (rightIndex - leftIndex <= sizeInsertionSort - 2)
+    if (rightIndex - leftIndex <= SIZE_INSERTION_SORT - 2)
     {
         insertsSort(array, leftIndex, rightIndex);
     }
