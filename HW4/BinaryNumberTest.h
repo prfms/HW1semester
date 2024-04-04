@@ -1,5 +1,6 @@
 #ifndef HOMEWORKS1SEMESTER_BINARYNUMBERTEST_H
 #define HOMEWORKS1SEMESTER_BINARYNUMBERTEST_H
+
 #include "BinaryNumber.h"
 
 typedef enum

@@ -1,5 +1,6 @@
 #ifndef HOMEWORKS_BINARYNUMBER_H
 #define HOMEWORKS_BINARYNUMBER_H
+
 #define LENGTH_BINARY_NUMBER sizeof(int) * 8
 #include <stdbool.h>
 
