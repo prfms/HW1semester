@@ -21,6 +21,7 @@ bool testGetValue()
     if (testTree->key == NULL)
     {
         free(testTree);
+        free(testTree->value);
         return false;
     }
     strcpy(testTree->key, "C");
@@ -29,7 +30,7 @@ bool testGetValue()
     testTree->leftChild = calloc(1, sizeof(Tree));
     if (testTree->leftChild == NULL)
     {
-        freeNode(testTree);
+        freeTree(testTree);
         return false;
     }
     testTree->leftChild->value = calloc(2, sizeof(char));
