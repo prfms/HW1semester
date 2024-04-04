@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <locale.h>
-#include "BinaryNumber.c"
-#include "BinaryNumberTest.c"
+#include "BinaryNumber.h"
+#include "BinaryNumberTest.h"
 
 int main()
 {
