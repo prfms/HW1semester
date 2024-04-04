@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <locale.h>
-#include "BinaryNumber.h"
-#include "BinaryNumberTest.h"
+#include "BinaryNumber.c"
+#include "BinaryNumberTest.c"
 
 int main()
 {
@@ -9,7 +9,7 @@ int main()
 
     if (testBinaryNumber())
     {
-        printf("Тесты не прошли!\n");
+        printf("РўРµСЃС‚С‹ РЅРµ РїСЂРѕС€Р»Рё!\n");
         return TestsFailed;
     }
     int firstNumber = 0;
@@ -17,7 +17,7 @@ int main()
     int scanResFirstNumber = 0;
     int scanResSecondNumber = 0;
 
-    printf("Введите два числа:\n");
+    printf("Р’РІРµРґРёС‚Рµ РґРІР° С‡РёСЃР»Р°:\n");
     do
     {
         scanResFirstNumber = scanf("%d", &firstNumber);
@@ -25,7 +25,7 @@ int main()
 
         if (!scanResFirstNumber || !scanResSecondNumber)
         {
-            printf("Ошибка ввода. Вводить можно только целые числа. Попробуйте еще раз!\n");
+            printf("РћС€РёР±РєР° РІРІРѕРґР°. Р’РІРѕРґРёС‚СЊ РјРѕР¶РЅРѕ С‚РѕР»СЊРєРѕ С†РµР»С‹Рµ С‡РёСЃР»Р°. РџРѕРїСЂРѕР±СѓР№С‚Рµ РµС‰Рµ СЂР°Р·!\n");
             scanf("%*[^\n]");
         }
 
@@ -49,7 +49,7 @@ int main()
 
     printArray(binarySum, LENGTH_BINARY_NUMBER);
     printf(" (%d)", decimalSum);
-    printf("\n\n Сумма %d и %d равна %d.\n", firstNumber, secondNumber, decimalSum);
+    printf("\n\n РЎСѓРјРјР° %d Рё %d СЂР°РІРЅР° %d.\n", firstNumber, secondNumber, decimalSum);
 
     return 0;
 }
