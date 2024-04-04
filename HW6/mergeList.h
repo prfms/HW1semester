@@ -1,7 +1,9 @@
 #ifndef HOMEWORKS_MERGELIST_H
 #define HOMEWORKS_MERGELIST_H
+
 #include <stdbool.h>
-#define MAX_LENGHT 256
+
+#define MAX_LENGTH 256
 
 typedef enum
 {
@@ -18,6 +20,9 @@ typedef enum
 } Error;
 
 typedef struct List List;
+
+// заполнение списка значениями из файла
+Error fillList(List **head, const char * const pathToFile);
 
 // добавление записи
 Error addRecord(List **head, char *name, char *phone);

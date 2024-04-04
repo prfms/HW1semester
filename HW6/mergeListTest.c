@@ -4,32 +4,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-Error fillList(List **head, const char * const pathToFile)
-{
-    if (head == NULL)
-    {
-        return MemoryAllocationError;
-    }
-    FILE *file = fopen(pathToFile, "r");
-    if (file == NULL)
-    {
-        return FileNotFound;
-    }
-    int errorCode = OK;
-    while (!feof(file))
-    {
-        char name[MAX_LENGHT] = {0};
-        char phone[MAX_LENGHT] = {0};
-        fscanf(file, "%s %s", name, phone);
-        errorCode = addRecord(head, name, phone);
-        if (errorCode != OK)
-        {
-            return errorCode;
-        }
-    }
-    return OK;
-}
-
 bool addTest()
 {
     List *head = NULL;
@@ -76,6 +50,8 @@ bool mergeSortTest()
     head->next = calloc(1, sizeof(List));
     if (head->next == NULL)
     {
+        free(head->name);
+        free(head->phone);
         return false;
     }
     head->next->name = strdup("Darya");
@@ -84,6 +60,8 @@ bool mergeSortTest()
     head->next->next = calloc(1, sizeof(List));
     if (head->next->next == NULL)
     {
+        free( head->next->name);
+        free(head->next->phone);
         return false;
     }
     head->next->next->name = strdup("Anya");

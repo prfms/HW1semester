@@ -24,6 +24,34 @@ Error addRecord(List **head, char *name, char *phone)
     return OK;
 }
 
+Error fillList(List **head, const char * const pathToFile)
+{
+    if (head == NULL)
+    {
+        return MemoryAllocationError;
+    }
+    FILE *file = fopen(pathToFile, "r");
+    if (file == NULL)
+    {
+        return FileNotFound;
+    }
+    int errorCode = OK;
+    while (!feof(file))
+    {
+        char name[MAX_LENGTH] = {0};
+        char phone[MAX_LENGTH] = {0};
+        fscanf(file, "%s %s", name, phone);
+        errorCode = addRecord(head, name, phone);
+        if (errorCode != OK)
+        {
+            fclose(file);
+            return errorCode;
+        }
+    }
+    fclose(file);
+    return OK;
+}
+
 void freeList(List **head)
 {
     List *tmp = NULL;

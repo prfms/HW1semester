@@ -1,9 +1,7 @@
 #ifndef HOMEWORKS1SEMESTER_MERGELISTTEST_H
 #define HOMEWORKS1SEMESTER_MERGELISTTEST_H
-#include "mergeList.h"
 
-// заполнение списка значениями из файла
-Error fillList(List **head, const char * const pathToFile);
+#include "mergeList.h"
 
 // тестирование addRecord и mergeSort
 bool tests();
