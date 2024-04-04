@@ -50,8 +50,7 @@ bool mergeSortTest()
     head->next = calloc(1, sizeof(List));
     if (head->next == NULL)
     {
-        free(head->name);
-        free(head->phone);
+        freeList(&head);
         return false;
     }
     head->next->name = strdup("Darya");
@@ -60,8 +59,7 @@ bool mergeSortTest()
     head->next->next = calloc(1, sizeof(List));
     if (head->next->next == NULL)
     {
-        free( head->next->name);
-        free(head->next->phone);
+        freeList(&head);
         return false;
     }
     head->next->next->name = strdup("Anya");
