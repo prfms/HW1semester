@@ -12,10 +12,10 @@ typedef enum
     TestsFailed = -100
 } Error;
 
-// Код ошибки:
-// -1 - неверная конвертация в двоичную форму
-// -2 - неверное сложение двоичных чисел
-// -3 - неверная конвертация в десятичную форму
+// Error code:
+// -1 - wrong conversion to binary form
+// -2 - wrong addition of two binary numbers
+// -3 - wrong conversion to decimal form
 Error testBinaryNumber();
 
 #endif //HOMEWORKS1SEMESTER_BINARYNUMBERTEST_H

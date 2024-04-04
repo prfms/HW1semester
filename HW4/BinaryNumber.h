@@ -4,16 +4,16 @@
 #define LENGTH_BINARY_NUMBER sizeof(int) * 8
 #include <stdbool.h>
 
-// представление десятичного числа в двоичной системе счисления
+// representation of decimal number in binary form
 void binaryRepresent(bool array[], int number);
 
-// сложение двух двоичных чисел, результат - двоичное число
+// addition of two binary numbers
 void addBinaryNumbers(bool firstNumber[], bool secondNumber[], bool answer[]);
 
-// представление двоичного числа в десятичной системе счисления
+// representation of binary number in decimal form
 int convertFromBinaryToDecimal(bool array[], char length);
 
-// вывод массива
+// print array on the screen
 void printArray(bool array[], char length);
 
 #endif //HOMEWORKS_BINARYNUMBER_H
