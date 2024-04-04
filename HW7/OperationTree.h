@@ -1,8 +1,9 @@
 #ifndef HOMEWORKS_OPERATIONTREE_H
 #define HOMEWORKS_OPERATIONTREE_H
+
 #include <stdio.h>
 
-typedef enum { Ok, MemoryAllocationError, DivisionByZero } Error;
+typedef enum { Ok, MemoryAllocationError, DivisionByZero, FileOpeningError, TestsFailed } Error;
 
 typedef struct Tree Tree;
 
@@ -10,7 +11,7 @@ typedef struct Tree Tree;
 // Returns:
 // Ok - if everything is ok;
 // MemoryAllocationError - if a memory allocation error occurred
-Error fillTree(Tree **root, FILE *fileName);
+Error fillTree(Tree **root, const char *fileName);
 
 // Outputs the expression stored in the tree
 void printExpression(Tree *tree);

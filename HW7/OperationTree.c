@@ -11,8 +11,17 @@ typedef struct Tree
     struct Tree *rightChild;
 } Tree;
 
-Error fillTree(Tree **root, FILE *file)
+Error fillTree(Tree **root, const char *fileName)
 {
+    FILE *file = fopen(fileName, "r");
+    if (file == NULL) {
+        return FileOpeningError;
+    }
+    if (feof(file))
+    {
+        fclose(file);
+        return FileOpeningError;
+    }
     bool isContinue = true;
     while (isContinue)
     {
@@ -34,17 +43,22 @@ Error fillTree(Tree **root, FILE *file)
                 (*root) = calloc(1, sizeof(Tree));
                 if ((*root) == NULL)
                 {
+                    fclose(file);
                     return MemoryAllocationError;
                 }
                 (*root)->operation = currentCharacter;
 
-                if (fillTree(&(*root)->leftChild, file) == MemoryAllocationError)
+                if (fillTree(&(*root)->leftChild, fileName) == MemoryAllocationError)
                 {
+                    freeTree(root);
+                    fclose(file);
                     return MemoryAllocationError;
                 }
 
-                if (fillTree(&(*root)->rightChild, file) == MemoryAllocationError)
+                if (fillTree(&(*root)->rightChild, fileName) == MemoryAllocationError)
                 {
+                    freeTree(root);
+                    fclose(file);
                     return MemoryAllocationError;
                 }
                 break;
@@ -52,6 +66,7 @@ Error fillTree(Tree **root, FILE *file)
                 (*root) = calloc(1, sizeof(Tree));
                 if ((*root) == NULL)
                 {
+                    fclose(file);
                     return MemoryAllocationError;
                 }
 
@@ -67,13 +82,15 @@ Error fillTree(Tree **root, FILE *file)
                 }
 
                 (*root)->operation = currentCharacter;
-                if (fillTree(&(*root)->leftChild, file) == MemoryAllocationError)
+                if (fillTree(&(*root)->leftChild, fileName) == MemoryAllocationError)
                 {
+                    fclose(file);
                     return MemoryAllocationError;
                 }
 
-                if (fillTree(&(*root)->rightChild, file) == MemoryAllocationError)
+                if (fillTree(&(*root)->rightChild, fileName) == MemoryAllocationError)
                 {
+                    fclose(file);
                     return MemoryAllocationError;
                 }
                 break;
@@ -82,6 +99,7 @@ Error fillTree(Tree **root, FILE *file)
                 (*root) = calloc(1, sizeof(Tree));
                 if ((*root) == NULL)
                 {
+                    fclose(file);
                     return MemoryAllocationError;
                 }
 
@@ -92,7 +110,7 @@ Error fillTree(Tree **root, FILE *file)
                 break;
         }
     }
-
+    fclose(file);
     return Ok;
 }
 
@@ -102,7 +120,10 @@ int evaluateTree(Tree *tree, Error *error)
     {
         return 0;
     }
-
+    if (error != 0)
+    {
+        return -1;
+    }
     int leftValue = evaluateTree(tree->leftChild, error);
     int rightValue = evaluateTree(tree->rightChild, error);
 
@@ -121,7 +142,8 @@ int evaluateTree(Tree *tree, Error *error)
             return leftValue * rightValue;
 
         case '/':
-            if (rightValue == 0){
+            if (rightValue == 0)
+            {
                 *error = DivisionByZero;
                 return -1;
             }
@@ -159,4 +181,5 @@ void freeTree(Tree **root)
     freeTree(&(*root)->leftChild);
     freeTree(&(*root)->rightChild);
     free(*root);
+    *root = NULL;
 }

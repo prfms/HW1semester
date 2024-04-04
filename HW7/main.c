@@ -1,36 +1,51 @@
 #include <stdio.h>
-#include "OperationTree.h"
-#include "OperationTreeTest.h"
+#include "OperationTree.c"
+#include "OperationTreeTest.c"
+
+void printErrors(Error errorCode)
+{
+    switch (errorCode)
+    {
+        case Ok:
+            break;
+        case MemoryAllocationError:
+            printf("Memory allocation error!\n");
+            break;
+        case  FileOpeningError:
+            printf("File opening error!\n");
+            break;
+        case TestsFailed:
+            printf("Tests have failed!\n");
+            break;
+        case DivisionByZero:
+            printf("Division by zero!\n");
+            break;
+    }
+}
 
 int main()
 {
     if (!tests())
     {
-        printf("Tests failed.\n");
-        return 0;
+        printErrors(TestsFailed);
+        return TestsFailed;
     }
 
+    const char *fileName = "HW7/input.txt";
     Tree *tree = NULL;
-    FILE *file = fopen("HW7/input.txt", "r");
-    if (file == NULL || feof(file))
+    Error error = fillTree(&tree, fileName);
+    if (error != Ok)
     {
-        printf("File opening error (or the file is empty).\n");
-        return 0;
-    }
-
-    if (fillTree(&tree, file) == MemoryAllocationError)
-    {
+        printErrors(error);
         freeTree(&tree);
-        printf("Memory allocation error.\n");
-        return 0;
+        return error;
     }
-    fclose(file);
 
-    Error error = Ok;
     int result = evaluateTree(tree, &error);
-    if (error != Ok){
-        printf("Division by zero!\n");
-        return -1;
+    if (error != Ok)
+    {
+        printErrors(error);
+        return error;
     }
 
     printExpression(tree);

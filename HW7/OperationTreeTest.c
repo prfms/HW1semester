@@ -2,34 +2,25 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-bool test1()
+bool testMultiplyAndAdd()
 {
     char tests[] = "(* (+ -10 -2) 3)";
     Tree *tree = NULL;
-    FILE *fileOut = fopen("test.txt", "w");
+    const char *fileName = "test.txt";
+    FILE *fileOut = fopen(fileName, "w");
     if (fileOut == NULL)
     {
         printf("File opening error.\n");
         return false;
     }
     fprintf(fileOut, "%s", tests);
-    fclose(fileOut);
+    //fclose(fileOut);
 
-    FILE *fileIn = fopen("test.txt", "r");
-    if (fileIn == NULL)
+    if (fillTree(&tree, fileName) == MemoryAllocationError)
     {
-        printf("File opening error.\n");
-        return false;
-    }
-
-    if (fillTree(&tree, fileIn) == MemoryAllocationError)
-    {
-        fclose(fileIn);
-        freeTree(&tree);
         printf("Memory allocation error.\n");
         return false;
     }
-    fclose(fileIn);
 
     Error error = Ok;
     int answer = evaluateTree(tree, &error);
@@ -37,34 +28,25 @@ bool test1()
     return answer == -36 && error == Ok;
 }
 
-bool test2()
+bool testAllOperations()
 {
     char tests[] = "(/ (* 5 10) (+ (- 10 3) (* 1 3)))";
     Tree *tree = NULL;
-    FILE *fileOut = fopen("test.txt", "w");
+    const char *fileName = "test.txt";
+    FILE *fileOut = fopen(fileName, "w");
     if (fileOut == NULL)
     {
         printf("File opening error.\n");
         return false;
     }
     fprintf(fileOut, "%s", tests);
-    fclose(fileOut);
+   // fclose(fileOut);
 
-    FILE *fileIn = fopen("test.txt", "r");
-    if (fileIn == NULL)
+    if (fillTree(&tree, fileName) == MemoryAllocationError)
     {
-        printf("File opening error.\n");
+        printf("Memory allocation error.\n");
         return false;
     }
-
-    if (fillTree(&tree, fileIn) == MemoryAllocationError)
-    {
-        fclose(fileIn);
-        freeTree(&tree);
-        printf("Memory allocation error.\n");
-        return 0;
-    }
-    fclose(fileIn);
 
     Error error = Ok;
     int answer = evaluateTree(tree, &error);
@@ -74,5 +56,5 @@ bool test2()
 
 bool tests()
 {
-    return test1() && test2();
+    return testMultiplyAndAdd() && testAllOperations();
 }
