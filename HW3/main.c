@@ -1,8 +1,8 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <locale.h>
-#include "QuickSort.c"
-#include "QuickSortTest.c"
+#include "QuickSort.h"
+#include "QuickSortTest.h"
 #define ARRAY_SIZE_BOUND 1000
 
 int main()
