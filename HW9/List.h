@@ -1,0 +1,8 @@
+﻿//
+// Created by nasty on 05.04.2024.
+//
+
+#ifndef HOMEWORKS1SEMESTER_LIST_H
+#define HOMEWORKS1SEMESTER_LIST_H
+
+#endif //HOMEWORKS1SEMESTER_LIST_H
