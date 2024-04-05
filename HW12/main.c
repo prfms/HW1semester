@@ -1,7 +1,7 @@
 ﻿#include <stdio.h>
 
-#include "lexicalAnalyzer.c"
-#include "lexicalAnalyzerTest.c"
+#include "lexicalAnalyzer.h"
+#include "lexicalAnalyzerTest.h"
 
 #define MAX_STRING_LENGTH 100
 
