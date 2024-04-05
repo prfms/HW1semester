@@ -7,11 +7,11 @@ typedef enum { Ok, MemoryAllocationError, DivisionByZero, FileOpeningError, Test
 
 typedef struct Tree Tree;
 
-// Fills in the tree from the file "fileName"
+// Fills in the tree from the FILE *file
 // Returns:
 // Ok - if everything is ok;
 // MemoryAllocationError - if a memory allocation error occurred
-Error fillTree(Tree **root, const char *fileName);
+Error fillTree(Tree **root, FILE *file);
 
 // Outputs the expression stored in the tree
 void printExpression(Tree *tree);

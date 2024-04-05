@@ -1,6 +1,6 @@
 #include <stdio.h>
-#include "OperationTree.c"
-#include "OperationTreeTest.c"
+#include "OperationTree.h"
+#include "OperationTreeTest.h"
 
 void printErrors(Error errorCode)
 {
@@ -31,20 +31,22 @@ int main()
         return TestsFailed;
     }
 
-    const char *fileName = "HW7/input.txt";
+    FILE *file = fopen("HW7/input.txt", "r");
     Tree *tree = NULL;
-    Error error = fillTree(&tree, fileName);
+    Error error = fillTree(&tree, file);
     if (error != Ok)
     {
         printErrors(error);
         freeTree(&tree);
+        fclose(file);
         return error;
     }
-
+    fclose(file);
     int result = evaluateTree(tree, &error);
     if (error != Ok)
     {
         printErrors(error);
+        fclose(file);
         return error;
     }
 
