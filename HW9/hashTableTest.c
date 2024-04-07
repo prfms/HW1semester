@@ -38,5 +38,6 @@ bool testHashTable()
     bool test2 = strcmp(getValueFromList(list17), "hash") == 0;;
     bool test3 = getAmountFromList(list14) == 1;
     bool test4 = getAmountFromList(list17) == 2;
+
     return test1 && test2 && test3 && test4;
 }
