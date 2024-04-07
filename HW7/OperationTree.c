@@ -105,12 +105,22 @@ int evaluateTree(Tree *tree, Error *error)
     {
         return 0;
     }
+
     if (*error != Ok)
     {
         return -1;
     }
     int leftValue = evaluateTree(tree->leftChild, error);
+
+    if (*error != Ok)
+    {
+        return -1;
+    }
     int rightValue = evaluateTree(tree->rightChild, error);
+    if (*error != Ok)
+    {
+        return -1;
+    }
 
     switch (tree->operation)
     {
