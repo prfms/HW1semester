@@ -19,9 +19,6 @@ typedef struct ListElement ListElement;
 List* createList();
 
 // add value to list
-// return 1 if not enough memory
-// return 0 if ok
-// return -1 if list doesn't exist
 ListError addValue(List *list, unsigned int value);
 
 // returns pointer to the first list element
@@ -31,8 +28,6 @@ ListElement* getFirstListElement(List *list);
 ListElement* getNextElement(ListElement* element);
 
 // returns value of list element by its pointer
-// errorCode gets 2 if list element doesn't exist
-// errorCode stays 0 if all is ok
 unsigned int getListElementValue(ListElement* element, ListError *errorCode);
 
 // deallocate list's memory
