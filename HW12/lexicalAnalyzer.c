@@ -6,35 +6,30 @@
 bool isNumber(const char* string)
 {
     const int stringLength = strlen(string);
-    int state = 0;
+    State state = Begin;
     for (int i = 0; i < stringLength + 1; ++i)
     {
         switch (state)
         {
-            case 0:
+            case Begin:
             {
                 if (isdigit(string[i]))
                 {
-                    state = 1;
-                    break;
-                }
-                if (string[i] == '.')
-                {
-                    state = 2;
+                    state = IntegerPart;
                     break;
                 }
                 return false;
             }
-            case 1:
+            case IntegerPart:
             {
                 if (isdigit(string[i]))
                 {
-                    state = 1;
+                    state = IntegerPart;
                     break;
                 }
                 if (string[i] == '.')
                 {
-                    state = 2;
+                    state = DecimalPoint;
                     break;
                 }
                 if (string[i] == 'E')
@@ -44,57 +39,57 @@ bool isNumber(const char* string)
                 }
                 return i == stringLength;
             }
-            case 2:
+            case DecimalPoint:
             {
                 if (isdigit(string[i]))
                 {
-                    state = 3;
+                    state = FractionalPart;
                     break;
                 }
                 return false;
             }
-            case 3:
+            case FractionalPart:
             {
                 if (isdigit(string[i]))
                 {
-                    state = 3;
+                    state = FractionalPart;
                     break;
                 }
                 if (string[i] == 'E')
                 {
-                    state = 4;
+                    state = Exponent;
                     break;
                 }
                 return i == stringLength;
             }
-            case 4:
+            case Exponent:
             {
                 if (isdigit(string[i]))
                 {
-                    state = 5;
+                    state = ExponentSign;
                     break;
                 }
                 if (strchr("+-", string[i]) != NULL)
                 {
-                    state = 6;
+                    state = ExponentDigits;
                     break;
                 }
                 return false;
             }
-            case 5:
+            case ExponentSign:
             {
                 if (isdigit(string[i]))
                 {
-                    state = 5;
+                    state =  ExponentSign;
                     break;
                 }
                 return i == stringLength;
             }
-            case 6:
+            case ExponentDigits:
             {
                 if (isdigit(string[i]))
                 {
-                    state = 5;
+                    state = ExponentSign;
                     break;
                 }
                 return false;
